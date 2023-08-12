@@ -17,7 +17,11 @@
         "port": 3000
       },
       "restartOn": {
-        "files": ["./package-lock.json"]
+        "files": [
+          "./package-lock.json"
+        ],
+        "branch": false,
+        "resume": false
       }
     },
     "build": {
@@ -39,8 +43,40 @@
       "name": "Install Dependencies",
       "command": "npm install",
       "restartOn": {
-        "files": ["./package.json"]
+        "files": [
+          "./package.json"
+        ],
+        "branch": false,
+        "resume": false
       }
+    },
+    "npx shadcn-ui@latest init": {
+      "name": "npx shadcn-ui@latest init",
+      "command": "npx shadcn-ui@latest init"
+    },
+    "npm i stripe": {
+      "name": "npm i stripe",
+      "command": "npm i stripe"
+    },
+    "npx shadcn-ui@latest add": {
+      "name": "npx shadcn-ui@latest add",
+      "command": "npx shadcn-ui@latest add"
+    },
+    "npx shadcn-ui@latest add card": {
+      "name": "npx shadcn-ui@latest add card",
+      "command": "npx shadcn-ui@latest add card"
+    },
+    "npm install @stripe/stripe-js use-shopping-cart": {
+      "name": "npm install @stripe/stripe-js use-shopping-cart",
+      "command": "npm install @stripe/stripe-js use-shopping-cart"
+    },
+    "npx shadcn-ui@latest add toast": {
+      "name": "npx shadcn-ui@latest add toast",
+      "command": "npx shadcn-ui@latest add toast"
+    },
+    "npx shadcn-ui@latest add badge": {
+      "name": "npx shadcn-ui@latest add badge",
+      "command": "npx shadcn-ui@latest add badge"
     }
   }
 }
