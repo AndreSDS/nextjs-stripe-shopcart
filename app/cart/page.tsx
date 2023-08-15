@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Product } from "@/types";
 
 export default function Cart() {
   const { cartCount, cartDetails, redirectToCheckout, removeItem } =
@@ -22,13 +23,31 @@ export default function Cart() {
   const products =
     cartDetails && Object.keys(cartDetails).map((key) => cartDetails[key]);
 
-  function checkout() {
-    console.log("");
+  async function checkout() {
+    setIsCheckingOut(true);
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cartDetails),
+      });
+
+      const { id } = await response.json();
+
+      await redirectToCheckout(id);
+      setIsCheckingOut(false);
+    } catch (error) {
+      console.log("Erro na funcão de checkout - ", error);
+      setIsCheckingOut(false);
+    }
   }
 
   return (
     <section className="flex flex-col items-center justify-center">
-      {products.map((product) => (
+      {products.map((product: Product) => (
         <Card key={product.name}>
           <CardHeader>
             <CardTitle className="tracking-wide">
@@ -50,14 +69,14 @@ export default function Cart() {
                   />
                 </div>
                 <div>
-                  <p className="text-md font-medium leading-none" Preço></p>
+                  <p className="text-md font-medium leading-none">Preço</p>
                   <p className="text-md text-muted-foreground">
                     {product.formattedValue}
                   </p>
                 </div>
               </div>
               <Trash2
-                onClick={() => removeItem()}
+                onClick={() => removeItem(product.id)}
                 className="text-red-400 hover:text-red-600"
               />
             </div>

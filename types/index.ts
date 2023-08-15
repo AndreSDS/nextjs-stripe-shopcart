@@ -1,4 +1,5 @@
 export interface Product {
+  sku?: string;
   id: number;
   name: string;
   description?: string;
@@ -6,6 +7,8 @@ export interface Product {
   currency: string;
   image: string;
   images?: string[];
+  quantity?: number;
+  formattedValue?: string;
 }
 
 export interface DummyProduct {
